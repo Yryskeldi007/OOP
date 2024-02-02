@@ -28,3 +28,50 @@ class SuperHero:
 # print(hero.double_health())
 # print(hero)
 # print(f'Длина фразы:{len(hero.catchphrase)}')
+
+
+class Hero(SuperHero):
+    people = 'people'
+
+    def __init__(self, name, nickname, superpower, health_points, catchphrase, damage=0, fly=False):
+        super().__init__(name, nickname, superpower, health_points, catchphrase)
+        self.damage = damage
+        self.fly = fly
+
+    def hp(self):
+        self.fly = True
+        print(f'Здоровье нашего героя: {self.health_points ** 2}')
+
+    def fly_sky(self):
+        print(f'fly in the {self.fly}_phrase')
+
+
+class SecondHero(SuperHero):
+    people = 'people'
+
+
+thor = Hero('thor', 'bog', 'grom', 200, 'хз', 200)
+cap = Hero('cap', 'pon', 'hello', 100, 'Avengers!', 100)
+
+thor.hp()
+thor.fly_sky()
+cap.hp()
+cap.fly_sky()
+
+
+class Villian(SecondHero):
+
+    def __init__(self, name, nickname, superpower, health_points, catchphrase):
+        super().__init__(name, nickname, superpower, health_points, catchphrase)
+        SuperHero.people = 'monster'
+
+    def gen_X(self):
+        pass
+
+    def crit(self, hero):
+        return f'Урон по Таносу: {hero.damage ** 2}'
+
+
+thanos = Villian('thanos', 'tank', 'stones', 1000, 'destroy')
+print(thanos.crit(thor))
+print(thanos.crit(cap))
